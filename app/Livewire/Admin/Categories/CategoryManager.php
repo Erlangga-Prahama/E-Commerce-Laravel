@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Admin\Categories;
 
 use App\Livewire\Forms\CategoryForm;
@@ -34,8 +35,23 @@ class CategoryManager extends Component
         $this->showModal = true;
     }
 
+    public function save(): void
+    {
+        if ($this->form->categoryModel) {
+            $this->authorize('update', $this->form->categoryModel);
+            $this->form->update();
+        } else {
+            $this->authorize('create', Category::class);
+            $this->form->store();
+        }
+
+        $this->showModal = false;
+    }
+
     public function delete(Category $category): void
     {
+        $this->authorize('delete', $category);
+
         if ($category->products()->exists()) {
             $this->addError('delete', 'Kategori masih punya produk, tidak bisa dihapus.');
             return;

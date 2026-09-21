@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+namespace App\Livewire\Forms;
+
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -22,6 +25,12 @@ class CategoryForm extends Form
         ];
     }
 
+    public function setCategory(Category $category): void
+    {
+        $this->categoryModel = $category;
+        $this->name = $category->name;
+    }
+
     public function store(): void
     {
         $this->validate();
@@ -40,7 +49,7 @@ class CategoryForm extends Form
 
         $this->categoryModel->update([
             'name' => $this->name,
-            'slug' => Str::slug($this->name)
+            'slug' => Str::slug($this->name),
         ]);
 
         $this->reset();

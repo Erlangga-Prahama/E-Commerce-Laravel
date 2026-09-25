@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 #[Layout('layouts.app')]
 class ProductManager extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
     public ProductForm $form;
     public bool $showModal = false;

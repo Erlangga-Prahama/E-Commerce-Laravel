@@ -36,4 +36,9 @@ class Product extends Model
     {
         return $this->images()->where('is_primary', true);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

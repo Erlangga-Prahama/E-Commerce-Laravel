@@ -5,6 +5,7 @@ use App\Livewire\Admin\Categories\CategoryManager;
 use App\Livewire\Admin\Products\ProductManager;
 use App\Livewire\ProductCatalog;
 use App\Livewire\ProductDetail;
+use App\Livewire\CartPage;
 
 Route::view('/', 'welcome');
 
@@ -25,4 +26,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
 Route::get('/products', ProductCatalog::class)->name('products.index');
 Route::get('/products/{product}', ProductDetail::class)->name('products.show');
+Route::get('/cart', CartPage::class)->name('cart.index');
 require __DIR__.'/auth.php';

@@ -28,7 +28,19 @@
 
             <p class="mt-4 text-gray-700 whitespace-pre-line">{{ $product->description }}</p>
 
-            {{-- Tombol "Tambah ke Keranjang" akan kita isi di Fase 7 --}}
+            @if (session('cart-message'))
+                <div class="bg-green-100 text-green-700 p-2 rounded mb-3 text-sm">{{ session('cart-message') }}</div>
+            @endif
+
+            @if ($product->stock > 0)
+                <form wire:submit="addToCart" class="flex items-center gap-2 mt-4">
+                    <input type="number" wire:model="quantity" min="1" max="{{ $product->stock }}" class="w-20 border rounded p-2">
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded">Tambah ke Keranjang</button>
+                </form>
+                @error('quantity') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+            @else
+                <p class="text-red-600 mt-4">Stok habis</p>
+            @endif
         </div>
     </div>
 </div>

@@ -1,11 +1,13 @@
 <?php
 
+use App\Livewire\AddressManager;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Categories\CategoryManager;
 use App\Livewire\Admin\Products\ProductManager;
 use App\Livewire\ProductCatalog;
 use App\Livewire\ProductDetail;
 use App\Livewire\CartPage;
+use App\Livewire\Checkout;
 
 Route::view('/', 'welcome');
 
@@ -22,6 +24,8 @@ Route::get('/admin-test', fn () => 'kamu admin!')->middleware(['auth', 'admin'])
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/categories', CategoryManager::class)->name('categories.index');
     Route::get('/products', ProductManager::class)->name('products.index');
+    Route::get('/addresses', AddressManager::class)->name('addresses.index');
+    Route::get('/checkout', Checkout::class)->name('checkout.index');
 });
 
 Route::get('/products', ProductCatalog::class)->name('products.index');

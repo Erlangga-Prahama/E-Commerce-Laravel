@@ -20,4 +20,19 @@ enum OrderStatus: string
             self::Cancelled => 'Dibatalkan',
         };
     }
+
+    public function allowedTransitions(): array
+    {
+        return match ($this) {
+            self::Pending => [self::Paid, self::Cancelled],
+            self::Paid => [self::Shipped, self::Cancelled],
+            self::Shipped => [self::Completed],
+            self::Completed => [self::Cancelled],
+        };
+    }
+
+    public function canTransitionTo(self $target): bool
+    {
+        return in_array($target, $this->allowedTransitions(), true);
+    }
 }

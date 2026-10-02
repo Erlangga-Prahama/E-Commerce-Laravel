@@ -33,6 +33,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/addresses', AddressManager::class)->name('addresses.index');
+    Route::get('/checkout', Checkout::class)->name('checkout.index');
     Route::get('/orders', OrderHistory::class)->name('orders.index');
     Route::get('/orders/{order}', OrderDetail::class)->name('orders.show');
 });

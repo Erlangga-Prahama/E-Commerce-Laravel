@@ -33,8 +33,8 @@
             <span>Rp{{ number_format($cart->subtotal(), 0, ',', '.') }}</span>
         </div>
 
-        {{-- <a href="{{ route('checkout.index') }}" class="block text-center bg-blue-600 text-white py-3 rounded mt-4">
+        <a href="{{ route('checkout.index') }}" class="block text-center bg-blue-600 text-white py-3 rounded mt-4">
             Lanjut ke Checkout
-        </a> --}}
+        </a>
     @endif
 </div>

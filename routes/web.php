@@ -3,11 +3,14 @@
 use App\Livewire\AddressManager;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Categories\CategoryManager;
+use App\Livewire\Admin\Orders\OrderManager;
 use App\Livewire\Admin\Products\ProductManager;
 use App\Livewire\ProductCatalog;
 use App\Livewire\ProductDetail;
 use App\Livewire\CartPage;
 use App\Livewire\Checkout;
+use App\Livewire\OrderDetail;
+use App\Livewire\OrderHistory;
 
 Route::view('/', 'welcome');
 
@@ -26,6 +29,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/products', ProductManager::class)->name('products.index');
     Route::get('/addresses', AddressManager::class)->name('addresses.index');
     Route::get('/checkout', Checkout::class)->name('checkout.index');
+    Route::get('/orders', OrderManager::class)->name('orders.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/orders', OrderHistory::class)->name('orders.index');
+    Route::get('/orders/{order}', OrderDetail::class)->name('orders.show');
 });
 
 Route::get('/products', ProductCatalog::class)->name('products.index');

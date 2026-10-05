@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -54,6 +55,12 @@ class CheckoutService
                 'subtotal' => $subtotal,
                 'shipping_cost' => $shippingCost,
                 'total' => $subtotal + $shippingCost,
+            ]);
+
+            Payment::create([
+                'order_id' => $order->id,
+                'method' => 'dummy',
+                'status' => 'pending',
             ]);
 
             foreach ($cart->items as $item) {

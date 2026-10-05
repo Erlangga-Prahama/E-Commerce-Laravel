@@ -11,6 +11,8 @@ use App\Livewire\CartPage;
 use App\Livewire\Checkout;
 use App\Livewire\OrderDetail;
 use App\Livewire\OrderHistory;
+use App\Livewire\PaymentSimulator;
+use App\Models\Payment;
 
 Route::view('/', 'welcome');
 
@@ -37,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', Checkout::class)->name('checkout.index');
     Route::get('/orders', OrderHistory::class)->name('orders.index');
     Route::get('/orders/{order}', OrderDetail::class)->name('orders.show');
+    Route::get('/orders/{order}/pay', PaymentSimulator::class)->name('payment.pay');
 });
 
 Route::get('/products', ProductCatalog::class)->name('products.index');

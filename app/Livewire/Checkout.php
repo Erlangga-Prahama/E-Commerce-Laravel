@@ -39,7 +39,7 @@ class Checkout extends Component
 
         $this->dispatch('cart-updated');
 
-        return redirect()->route('orders.show', $order);
+        return redirect()->route('payment.pay', $order);
     }
 
     public function render(CartService $cartService, CheckoutService $checkoutService)

@@ -4,7 +4,14 @@
 
     <div class="bg-white rounded shadow p-4 mb-4">
         <span class="text-sm px-3 py-1 rounded bg-blue-100 text-blue-700">{{ $order->status->label() }}</span>
+        
+        @if ($order->payment?->status->value === 'pending')
+            <a href="{{ route('payment.pay', $order) }}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded text-sm mt-2">
+                Bayar Sekarang
+            </a>
+        @endif
     </div>
+
 
     <div class="bg-white rounded shadow p-4 mb-4">
         <h2 class="font-bold mb-3">Alamat Pengiriman</h2>

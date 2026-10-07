@@ -1,3 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-paper text-ink font-sans antialiased;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 bg-accent text-white font-medium px-5 py-2.5 rounded-sm hover:bg-accent/90 transition-colors disabled:opacity-50;
+    }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 border border-line text-ink font-medium px-5 py-2.5 rounded-sm hover:border-ink transition-colors;
+    }
+    .input {
+        @apply w-full border border-line rounded-sm px-3 py-2 text-ink placeholder:text-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none;
+    }
+    .badge {
+        @apply inline-flex items-center text-xs px-2 py-0.5 rounded-sm font-medium;
+    }
+    .pill {
+        @apply inline-flex items-center px-3 py-1.5 rounded-full text-sm border border-line transition-colors hover:border-ink;
+    }
+    .pill-active {
+        @apply bg-primary text-white border-primary hover:border-primary;
+    }
+}

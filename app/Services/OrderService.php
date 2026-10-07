@@ -12,7 +12,7 @@ class OrderService
     {
         if (!$order->status->canTransitionTo($newStatus)) {
             throw new RuntimeException(
-                "Tidak bisa ubah status dari {$order->status->label()} ke {$newStatus->label}."
+                "Tidak bisa ubah status dari {$order->status->label()} ke {$newStatus->label()}."
             );
         }
 

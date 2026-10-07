@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Actions\Logout;
 use App\Livewire\AddressManager;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Categories\CategoryManager;
@@ -13,6 +14,7 @@ use App\Livewire\OrderDetail;
 use App\Livewire\OrderHistory;
 use App\Livewire\PaymentSimulator;
 use App\Models\Payment;
+use Illuminate\Http\Request;
 
 Route::view('/', 'welcome');
 
@@ -23,6 +25,12 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::post('/logout', function(Request $request, Logout $logout){
+    $logout();
+
+    return redirect('/');
+})->name('logout')->middleware('auth');
 
 Route::get('/admin-test', fn () => 'kamu admin!')->middleware(['auth', 'admin']);
 

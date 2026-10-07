@@ -10,7 +10,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use RuntimeException;
 
-#[Layout('layouts.app')]
+#[Layout('layouts.admin')]
 class OrderManager extends Component
 {
     use WithPagination;

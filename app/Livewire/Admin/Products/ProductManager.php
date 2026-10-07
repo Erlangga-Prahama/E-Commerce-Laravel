@@ -12,7 +12,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 
-#[Layout('layouts.app')]
+#[Layout('layouts.admin')]
 class ProductManager extends Component
 {
     use WithPagination;

@@ -20,7 +20,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(default: route('products.index', absolute: false), navigate: true);
     }
 }; ?>
 
@@ -42,17 +42,9 @@ new #[Layout('layouts.guest')] class extends Component
     <form wire:submit="login" class="flex flex-col gap-5">
         <div>
             <label for="email" class="block text-sm font-medium mb-1">Email</label>
-            <input
-                id="email"
-                type="email"
-                wire:model="email"
-                required
-                autofocus
-                autocomplete="email"
-                placeholder="nama@email.com"
-                class="input"
-            >
-            @error('email') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
+            <input id="email" type="email" wire:model="form.email" required autofocus
+                   autocomplete="username" placeholder="nama@email.com" class="input">
+            @error('form.email') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div>
@@ -64,19 +56,13 @@ new #[Layout('layouts.guest')] class extends Component
                     </a>
                 @endif
             </div>
-            <input
-                id="password"
-                type="password"
-                wire:model="password"
-                required
-                autocomplete="current-password"
-                class="input"
-            >
-            @error('password') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
+            <input id="password" type="password" wire:model="form.password" required
+                   autocomplete="current-password" class="input">
+            @error('form.password') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <label class="flex items-center gap-2 text-sm">
-            <input type="checkbox" wire:model="remember" class="accent-primary">
+            <input type="checkbox" wire:model="form.remember" class="accent-primary">
             Ingat saya
         </label>
 

@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $title ?? config('app.name') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+</head>
+<body class="min-h-screen bg-paper text-ink font-sans">
+    <div class="min-h-screen grid lg:grid-cols-2">
+        <aside class="hidden lg:flex flex-col justify-between bg-primary text-white p-12">
+            <a href="/" class="font-display text-xl font-bold">Toko<span class="text-accent">.</span></a>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+                <p class="font-display text-3xl font-bold leading-tight max-w-sm">
+                    Kebutuhan harian, dari elektronik sampai dapur, di satu tempat.
+                </p>
+                <p class="text-white/70 text-sm mt-4 max-w-sm">
+                    Elektronik, fashion, rumah tangga, kesehatan, makanan, olahraga, dan alat tulis.
+                </p>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <p class="text-white/50 text-sm">Ongkos kirim flat Rp15.000.</p>
+        </aside>
+
+        <main class="flex items-center justify-center p-6">
+            <div class="w-full max-w-sm">
+                <a href="/" class="lg:hidden font-display text-xl font-bold block mb-8">
+                    Toko<span class="text-accent">.</span>
+                </a>
                 {{ $slot }}
             </div>
-        </div>
-    </body>
+        </main>
+    </div>
+
+    @livewireScripts
+</body>
 </html>

@@ -32,57 +32,52 @@ new #[Layout('layouts.guest')] class extends Component
 
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(route('products.index', absolute: false), navigate: true);
     }
 }; ?>
 
-<div>
-    <form wire:submit="register">
-        <!-- Name -->
+<div class="flex flex-col gap-8">
+    <div>
+        <h1 class="font-display text-2xl font-bold">Buat akun baru</h1>
+        <p class="text-sm text-muted mt-1">
+            Sudah punya akun?
+            <a href="{{ route('login') }}" wire:navigate class="text-primary hover:underline">Masuk</a>
+        </p>
+    </div>
+
+    <form wire:submit="register" class="flex flex-col gap-5">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <label for="name" class="block text-sm font-medium mb-1">Nama lengkap</label>
+            <input id="name" type="text" wire:model="name" required autofocus
+                   autocomplete="name" class="input">
+            @error('name') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div>
+            <label for="email" class="block text-sm font-medium mb-1">Email</label>
+            <input id="email" type="email" wire:model="email" required
+                   autocomplete="username" placeholder="nama@email.com" class="input">
+            @error('email') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div>
+            <label for="password" class="block text-sm font-medium mb-1">Kata sandi</label>
+            <input id="password" type="password" wire:model="password" required
+                   autocomplete="new-password" class="input">
+            <p class="text-xs text-muted mt-1">Minimal 8 karakter.</p>
+            @error('password') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div>
+            <label for="password_confirmation" class="block text-sm font-medium mb-1">Ulangi kata sandi</label>
+            <input id="password_confirmation" type="password" wire:model="password_confirmation" required
+                   autocomplete="new-password" class="input">
+            @error('password_confirmation') <p class="text-danger text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="btn-primary w-full" wire:loading.attr="disabled" wire:target="register">
+            <span wire:loading.remove wire:target="register">Daftar</span>
+            <span wire:loading wire:target="register">Memproses...</span>
+        </button>
     </form>
 </div>

@@ -33,8 +33,10 @@ class ProductManager extends Component
         $this->showModal = true;
     }
 
-    public function openEdit(Product $product): void
+    public function openEdit(int $productId): void
     {
+        $product = Product::findOrFail($productId);
+
         $this->authorize('update', $product);
         $this->form->setProduct($product);
         $this->showModal = true;
@@ -69,8 +71,10 @@ class ProductManager extends Component
         $image->update(['is_primary' => true]);
     }
 
-    public function delete(Product $product): void
+    public function delete(int $productId): void
     {
+        $product = Product::findOrFail($productId);
+
         $this->authorize('delete', $product);
 
         foreach ($product->images as $image) {

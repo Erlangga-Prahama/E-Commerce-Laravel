@@ -100,7 +100,7 @@ class ProductForm extends Form
         $nextSort = $product->images()->max('sort_order') + 1;
 
         foreach ($this->newImages as $index => $image) {
-            $path = $image->store('products', 'public');
+            $path = $image->store('products');
 
             $product->images()->create([
                 'path' => $path,

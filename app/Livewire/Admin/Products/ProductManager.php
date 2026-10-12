@@ -59,7 +59,7 @@ class ProductManager extends Component
     {
         $this->authorize('update', $image->product);
 
-        Storage::disk('public')->delete($image->path);
+        Storage::delete($image->path);
         $image->delete();
     }
 
@@ -78,7 +78,7 @@ class ProductManager extends Component
         $this->authorize('delete', $product);
 
         foreach ($product->images as $image) {
-            Storage::disk('public')->delete($image->path);
+            Storage::delete($image->path);
         }
 
         $product->delete();

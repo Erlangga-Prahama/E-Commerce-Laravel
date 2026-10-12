@@ -62,10 +62,10 @@ class ProductSeeder extends Seeder
                 Product::create([
                     'category_id' => $category->id,
                     'name' => $name,
-                    'slug' => Str::slug($name) . '-' . fake()->unique()->numberBetween(1000, 9999),
-                    'description' => fake()->paragraph(3),
+                    'slug' => Str::slug($name) . '-' . Str::lower(Str::random(5)),
+                    'description' => "{$name}. Produk berkualitas dengan pengiriman cepat ke seluruh Indonesia.",
                     'price' => $price,
-                    'stock' => fake()->numberBetween(5, 80),
+                    'stock' => random_int(5, 80),
                     'is_active' => true,
                 ]);
             }

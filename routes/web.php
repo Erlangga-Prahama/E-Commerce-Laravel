@@ -16,7 +16,7 @@ use App\Livewire\PaymentSimulator;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
-Route::view('/', 'welcome');
+Route::get('/', ProductCatalog::class);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
